@@ -43,16 +43,17 @@ const pangApp = {
         this.drawGround()
         this.drawHeader()
 
+        this.catchLives()
         this.platform1.draw()
         this.player1.draw()
-
-        // this.funcionFran()
+        
         if (this.frameCounter > 150 && this.frameCounter < 500) {
             this.generateLives()
-
+            
         } else if (this.frameCounter === 1000) {
             this.frameCounter = 0
         }
+        console.log(this.frameCounter)
 
     },
 
@@ -83,10 +84,10 @@ const pangApp = {
 
     // Player's movement
     setEventListeners() {
-        document.onkeyup = event => {
+        document.onkeydown = event => {
             const { key } = event
 
-            if (key === 'ArrowLeft') {                                      // Bloquear cuando no esté en las dos alturas posibles
+            if (key === 'ArrowLeft') {    // Bloquear cuando no esté en las dos alturas posibles
 
                 if (this.player1.playerPos.y + this.player1.playerSize.h === this.platform1.platformPos.y) {
                     if (this.player1.playerPos.x <= this.platform1.platformPos.x) {
@@ -149,18 +150,27 @@ const pangApp = {
 
     // Lives - power ups
     generateLives() {
+        // if (this.lives1 !== undefined) {
         this.lives1.draw()
-    }, 
+        // }
+    },
 
-    // catchLives() {
-    //     if (this.player1.playerPos.x + this.player1.playerSize.w >= this.lives1.livesPos.x) {
-    //         if (this.livesCounter <= 3) this.livesCounter++
+    catchLives() {
 
-    //         // Hacer que el cuadradito de las vidas desaparezca
-    //         this.framesCounter = -300
+        if (this.player1.playerPos.x + this.player1.playerSize.w <= this.lives1?.livesPos.x + this.lives1?.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= this.lives1?.livesPos.x) {
+            console.log('estoy dentro del catch')
+            if (this.livesCounter <= 3) {
+                this.livesCounter++
+                console.log(this.livesCounter)
+            }
+
+            // Hacer que el cuadradito de las vidas desaparezca
+            this.framesCounter = 0
+            // this.lives1 = undefined
+            console.log(this.framesCounter)
 
 
-    //     }
-    // }
+        }
+    }
 
 }

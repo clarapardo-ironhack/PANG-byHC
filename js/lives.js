@@ -15,8 +15,6 @@ class Lives {
     }
 
     draw() {
-        console.log('Estoy dentro de draw')
-
         this.ctx.fillStyle = 'blue'
         this.ctx.fillRect(this.livesPos.x, this.livesPos.y, this.livesSize.w, this.livesSize.h)
     }
