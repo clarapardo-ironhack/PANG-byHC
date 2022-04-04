@@ -9,6 +9,9 @@ const pangApp = {
     canvasNode: undefined,      /// ¿? ¿? ¿? ¿?
     ctx: undefined,
     player1: undefined,
+    lives1: undefined,
+    livesCounter: 3,
+    frameCounter: 0,
 
 
     init(canvasID) {
@@ -18,6 +21,7 @@ const pangApp = {
         this.setDimensions()
         this.createPlayer()
         this.createPlatformStairs()
+        this.createLives()
         this.drawAll()
 
         this.setEventListeners()
@@ -41,6 +45,15 @@ const pangApp = {
 
         this.platform1.draw()
         this.player1.draw()
+
+        // this.funcionFran()
+        if (this.frameCounter > 150 && this.frameCounter < 500) {
+            this.generateLives()
+
+        } else if (this.frameCounter === 1000) {
+            this.frameCounter = 0
+        }
+
     },
 
     drawGround() {
@@ -59,6 +72,10 @@ const pangApp = {
 
     createPlatformStairs() {
         this.platform1 = new PlatformsStairs(this.ctx, this.gameSize, 300, 375, 700, 300)
+    },
+
+    createLives() {
+        this.lives1 = new Lives(this.ctx, this.platform1.platformPos.x, this.platform1.platformPos.y)
     },
 
 
@@ -119,11 +136,31 @@ const pangApp = {
         setInterval(() => {
             this.clearAll()
             this.drawAll()
+            this.frameCounter++
+
         }, 30)
     },
 
     clearAll() {
         this.ctx.clearRect(0, 0, this.gameSize.w, this.gameSize.h)
-    }
+    },
+
+
+
+    // Lives - power ups
+    generateLives() {
+        this.lives1.draw()
+    }, 
+
+    // catchLives() {
+    //     if (this.player1.playerPos.x + this.player1.playerSize.w >= this.lives1.livesPos.x) {
+    //         if (this.livesCounter <= 3) this.livesCounter++
+
+    //         // Hacer que el cuadradito de las vidas desaparezca
+    //         this.framesCounter = -300
+
+
+    //     }
+    // }
 
 }
