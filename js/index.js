@@ -9,7 +9,7 @@ const pangApp = {
     canvasNode: undefined,      /// ¿? ¿? ¿? ¿?
     ctx: undefined,
     player1: undefined,
-    lives1: undefined,
+    lives1: [],
     livesCounter: 3,
     frameCounter: 0,
 
@@ -21,9 +21,9 @@ const pangApp = {
         this.setDimensions()
         this.createPlayer()
         this.createPlatformStairs()
-        this.createLives()
         this.drawAll()
-
+        
+        this.createLives()
         this.setEventListeners()
         this.start()
     },
@@ -52,6 +52,7 @@ const pangApp = {
             
         } else if (this.frameCounter === 1000) {
             this.frameCounter = 0
+            this.createLives()
         }
         console.log(this.frameCounter)
 
@@ -76,7 +77,8 @@ const pangApp = {
     },
 
     createLives() {
-        this.lives1 = new Lives(this.ctx, this.platform1.platformPos.x, this.platform1.platformPos.y)
+        this.lives1.push(new Lives(this.ctx, this.platform1.platformPos.x, this.platform1.platformPos.y))
+        console.log(this.lives1)
     },
 
 
@@ -151,26 +153,28 @@ const pangApp = {
     // Lives - power ups
     generateLives() {
         // if (this.lives1 !== undefined) {
-        this.lives1.draw()
+        this.lives1[0]?.draw()
         // }
     },
 
     catchLives() {
-
-        if (this.player1.playerPos.x + this.player1.playerSize.w <= this.lives1?.livesPos.x + this.lives1?.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= this.lives1?.livesPos.x) {
-            console.log('estoy dentro del catch')
-            if (this.livesCounter <= 3) {
-                this.livesCounter++
-                console.log(this.livesCounter)
+        this.lives1?.forEach((elmnt) => {
+            
+            if (this.player1.playerPos.x + this.player1.playerSize.w <= elmnt.livesPos.x + elmnt.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= elmnt.livesPos.x) {
+                console.log('estoy dentro del catch')
+                if (this.livesCounter <= 3) {
+                    this.livesCounter++
+                    console.log(this.livesCounter)
+                }
+    
+                this.lives1 = []
+    
+    
             }
-
-            // Hacer que el cuadradito de las vidas desaparezca
-            this.framesCounter = 0
-            // this.lives1 = undefined
-            console.log(this.framesCounter)
-
-
         }
+
+
+        )
     }
 
 }
