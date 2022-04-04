@@ -22,7 +22,7 @@ const pangApp = {
         this.createPlayer()
         this.createPlatformStairs()
         this.drawAll()
-        
+
         this.createLives()
         this.setEventListeners()
         this.start()
@@ -46,15 +46,14 @@ const pangApp = {
         this.catchLives()
         this.platform1.draw()
         this.player1.draw()
-        
+
         if (this.frameCounter > 150 && this.frameCounter < 500) {
             this.generateLives()
-            
+
         } else if (this.frameCounter === 1000) {
             this.frameCounter = 0
             this.createLives()
         }
-        console.log(this.frameCounter)
 
     },
 
@@ -78,7 +77,6 @@ const pangApp = {
 
     createLives() {
         this.lives1.push(new Lives(this.ctx, this.platform1.platformPos.x, this.platform1.platformPos.y))
-        console.log(this.lives1)
     },
 
 
@@ -152,24 +150,18 @@ const pangApp = {
 
     // Lives - power ups
     generateLives() {
-        // if (this.lives1 !== undefined) {
         this.lives1[0]?.draw()
-        // }
     },
 
     catchLives() {
         this.lives1?.forEach((elmnt) => {
-            
+
             if (this.player1.playerPos.x + this.player1.playerSize.w <= elmnt.livesPos.x + elmnt.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= elmnt.livesPos.x) {
-                console.log('estoy dentro del catch')
-                if (this.livesCounter <= 3) {
+                if (this.livesCounter < 3) {
                     this.livesCounter++
-                    console.log(this.livesCounter)
                 }
-    
                 this.lives1 = []
-    
-    
+
             }
         }
 
