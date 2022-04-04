@@ -16,7 +16,6 @@ class Player {
     init() {
         this.imageInstance = new Image()
         this.imageInstance.src = 'img/marciano.png'
-        // this.imageInstance.onload = () => this.draw()    // ACORDARSE DE BORRAR - al darme mov!
     }
 
     draw() {
@@ -26,13 +25,13 @@ class Player {
 
 
     // Movement instructions
-    moveLeft() {                     // Incluir el mantener pulsado
+    moveLeft() {
         if (this.playerPos.x > 5) {
             this.playerPos.x -= 15
         }
     }
 
-    moveRight() {                    // Incluir el mantener pulsado
+    moveRight() {
         if (this.playerPos.x + this.playerSize.w <= this.gameSize.w) {
             this.playerPos.x += 15
         }

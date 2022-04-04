@@ -6,10 +6,11 @@ const pangApp = {
     license: undefined,
 
     gameSize: { w: undefined, h: undefined },
-    canvasNode: undefined,      /// ¿? ¿? ¿? ¿?
+    canvasNode: undefined,
     ctx: undefined,
     player1: undefined,
     lives1: [],
+    bullets1: [],
     livesCounter: 3,
     frameCounter: 0,
 
@@ -21,9 +22,10 @@ const pangApp = {
         this.setDimensions()
         this.createPlayer()
         this.createPlatformStairs()
+        this.createBullets()
         this.drawAll()
-
         this.createLives()
+
         this.setEventListeners()
         this.start()
     },
@@ -46,6 +48,9 @@ const pangApp = {
         this.catchLives()
         this.platform1.draw()
         this.player1.draw()
+        this.bullets1.forEach((eachBullet) => {
+            eachBullet.draw()
+        })
 
         if (this.frameCounter > 150 && this.frameCounter < 500) {
             this.generateLives()
@@ -78,7 +83,9 @@ const pangApp = {
     createLives() {
         this.lives1.push(new Lives(this.ctx, this.platform1.platformPos.x, this.platform1.platformPos.y))
     },
-
+    createBullets() {
+        this.bullets1.push(new Bullets(this.ctx, this.player1.playerPos.x, this.player1.playerPos.y, this.player1.playerSize.w, this.player1.playerSize.h))
+    },
 
 
 
@@ -87,7 +94,7 @@ const pangApp = {
         document.onkeydown = event => {
             const { key } = event
 
-            if (key === 'ArrowLeft') {    // Bloquear cuando no esté en las dos alturas posibles
+            if (key === 'ArrowLeft') {
 
                 if (this.player1.playerPos.y + this.player1.playerSize.h === this.platform1.platformPos.y) {
                     if (this.player1.playerPos.x <= this.platform1.platformPos.x) {
@@ -99,7 +106,7 @@ const pangApp = {
                     this.player1.moveLeft()
                 }
             }
-            if (key === 'ArrowRight') {                                     // Bloquear cuando no esté en las dos alturas posibles
+            if (key === 'ArrowRight') {
                 if (this.player1.playerPos.y + this.player1.playerSize.h === this.platform1.platformPos.y) {
                     if (this.player1.playerPos.x + this.player1.playerSize.w >= this.platform1.platformPos.x + this.platform1.platformSize.w) {
                     } else {
@@ -130,6 +137,9 @@ const pangApp = {
                     }
                 }
             }
+            if (key === ' ') {
+                this.createBullets()
+            }
         }
     },
 
@@ -157,11 +167,11 @@ const pangApp = {
         this.lives1?.forEach((elmnt) => {
 
             if (this.player1.playerPos.x + this.player1.playerSize.w <= elmnt.livesPos.x + elmnt.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= elmnt.livesPos.x) {
-                if (this.livesCounter < 3) {
+                console.log('estoy dentro del catch')
+                if (this.livesCounter <= 3) {
                     this.livesCounter++
                 }
                 this.lives1 = []
-
             }
         }
 
