@@ -1,5 +1,7 @@
 window.onload = () => {
     document.getElementById('start-button').onclick = () => {
+        document.querySelector('.start-game').setAttribute('class', 'start-game hide')
+        document.getElementById('canvas').classList.toggle("hide")
         startGame()
     }
 
@@ -239,9 +241,6 @@ const pangApp = {
 
             this.enemies1.push(new Enemies(this.ctx, this.gameSize, eachEnemy.enemyPos.x, eachEnemy.enemyPos.y, eachEnemy.enemySize.w / 2, eachEnemy.enemySize.w / 2, -1))
         }
-
-        console.log(this.enemies1)
-
     },
 
     // // 2. Player

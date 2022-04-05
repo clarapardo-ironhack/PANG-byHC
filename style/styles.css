@@ -1,6 +1,6 @@
 * {
     padding: 0;
-    margin: 0
+    margin: 0;
 }
 
 #canvas {
@@ -9,5 +9,20 @@
 
 body {
     text-align: center;
-    margin-top: 30px
+}
+
+.hide {
+    display: none;
+}
+
+
+/* START GAME*/
+
+.start-game {
+    background-color: black;
+    margin: 0px;
+    height: 100vh;
+    font-family: sans-serif;
+    color: white;
+    margin: 20px
 }
