@@ -1,12 +1,12 @@
 class Enemies {
 
-    constructor(ctx, gameSize, posX, posY) {
+    constructor(ctx, gameSize, posX, posY, sizeW, sizeH, index) {
         this.ctx = ctx
         this.gameSize = gameSize
         
         this.enemyPos = { x: posX, y: posY }
-        this.enemySize = { w: 50, h: 50 }
-        this.enemyVel = { x: 2, y: 1 }            //// ¿?¿?¿?
+        this.enemySize = { w: sizeW, h: sizeH }
+        this.enemyVel = { x: 8 * index, y: 4 }
 
         // this.enemyPhysics = { gravity: 0.1 }
 

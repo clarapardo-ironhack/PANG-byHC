@@ -1,3 +1,14 @@
+window.onload = () => {
+    document.getElementById('start-button').onclick = () => {
+        startGame()
+    }
+
+
+    function startGame() {
+        pangApp.init('canvas')
+    }
+}
+
 const pangApp = {
     name: 'PANG',
     description: 'Project 1',
@@ -25,8 +36,8 @@ const pangApp = {
         this.createPlayer()
         this.createPlatformStairs()
         this.drawAll()
-        this.createLives()
         this.createEnemies()
+        this.createLives()
 
         this.setEventListeners()
         this.start()
@@ -57,6 +68,7 @@ const pangApp = {
             eachElement.draw()
         })
         this.bulletEnemyCollision()
+        this.playerEnemyCollision()
 
 
         if (this.frameCounter > 150 && this.frameCounter < 500) {
@@ -97,8 +109,9 @@ const pangApp = {
     },
 
     createEnemies() {
-        this.enemies1.push(new Enemies(this.ctx, this.gameSize, 250, 250))
-        console.log(this.enemies1)
+        this.enemies1.push(new Enemies(this.ctx, this.gameSize, 250, 150, 150, 150, 1))
+        this.enemies1.push(new Enemies(this.ctx, this.gameSize, 1000, 50, 150, 150, -1))
+
     },
 
 
@@ -195,30 +208,73 @@ const pangApp = {
 
 
 
-    // Enemies
-
+    // Collisions
+    // // 1. Enemies
     bulletEnemyCollision() {
-        // console.log(this.enemies1[0].enemyPos)
 
-        this.bullets1.forEach(eachBullet => {
+        this.enemies1.forEach(eachEnemy => {
+            this.bullets1.forEach(eachBullet => {
 
-            if (this.enemies1[0].enemyPos.x < eachBullet.bulletPos.x + eachBullet.bulletSize.w &&
-                this.enemies1[0].enemyPos.x + this.enemies1[0].enemySize.w > eachBullet.bulletPos.x &&
-                this.enemies1[0].enemyPos.y < eachBullet.bulletPos.y + eachBullet.bulletSize.h &&
-                this.enemies1[0].enemySize.h + this.enemies1[0].enemyPos.y > eachBullet.bulletPos.y) {
+                if (eachEnemy.enemyPos.x < eachBullet.bulletPos.x + eachBullet.bulletSize.w &&
+                    eachEnemy.enemyPos.x + eachEnemy.enemySize.w > eachBullet.bulletPos.x &&
+                    eachEnemy.enemyPos.y < eachBullet.bulletPos.y + eachBullet.bulletSize.h &&
+                    eachEnemy.enemySize.h + eachEnemy.enemyPos.y > eachBullet.bulletPos.y) {
 
-                console.log('colisión')
+                    this.enemyReduction(eachEnemy)
 
-
-
-            }
-
-
-
+                    this.enemies1.splice(this.enemies1.indexOf(eachEnemy), 1)
+                    this.bullets1.splice(this.bullets1.indexOf(eachBullet), 1)
+                }
+            })
         })
 
-    }
+    },
 
+    enemyReduction(eachEnemy) {
+
+        if (eachEnemy.enemySize.w < 50) {
+
+        } else {
+            this.enemies1.push(new Enemies(this.ctx, this.gameSize, eachEnemy.enemyPos.x, eachEnemy.enemyPos.y, eachEnemy.enemySize.w / 2, eachEnemy.enemySize.w / 2, 1))
+
+            this.enemies1.push(new Enemies(this.ctx, this.gameSize, eachEnemy.enemyPos.x, eachEnemy.enemyPos.y, eachEnemy.enemySize.w / 2, eachEnemy.enemySize.w / 2, -1))
+        }
+
+        console.log(this.enemies1)
+
+    },
+
+    // // 2. Player
+    playerEnemyCollision() {
+
+        this.enemies1.forEach(eachEnemy => {
+
+            if (eachEnemy.enemyPos.x < this.player1.playerPos.x + this.player1.playerSize.w &&
+                eachEnemy.enemyPos.x + eachEnemy.enemySize.w > this.player1.playerPos.x &&
+                eachEnemy.enemyPos.y < this.player1.playerPos.y + this.player1.playerSize.h &&
+                eachEnemy.enemySize.h + eachEnemy.enemyPos.y > this.player1.playerPos.y) {
+
+                eachEnemy.invertVelocityX()
+                eachEnemy.invertVelocityY()
+
+
+                if (this.livesCounter > 1) {
+                    this.livesCounter--
+                    console.log(this.livesCounter)
+                } else {
+                    //// ####### AQUI SE MUERE  :(
+                    this.endGameDeath()
+                }
+
+            }
+        })
+
+    },
+
+
+    endGameDeath() {
+
+    }
 
 
 }
