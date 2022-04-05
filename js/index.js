@@ -11,8 +11,10 @@ const pangApp = {
     player1: undefined,
     lives1: [],
     bullets1: [],
+    enemies1: [],
     livesCounter: 3,
     frameCounter: 0,
+
 
 
     init(canvasID) {
@@ -22,9 +24,9 @@ const pangApp = {
         this.setDimensions()
         this.createPlayer()
         this.createPlatformStairs()
-        this.createBullets()
         this.drawAll()
         this.createLives()
+        this.createEnemies()
 
         this.setEventListeners()
         this.start()
@@ -51,6 +53,11 @@ const pangApp = {
         this.bullets1.forEach((eachBullet) => {
             eachBullet.draw()
         })
+        this.enemies1.forEach((eachElement) => {
+            eachElement.draw()
+        })
+        this.bulletEnemyCollision()
+
 
         if (this.frameCounter > 150 && this.frameCounter < 500) {
             this.generateLives()
@@ -59,6 +66,7 @@ const pangApp = {
             this.frameCounter = 0
             this.createLives()
         }
+
 
     },
 
@@ -83,8 +91,14 @@ const pangApp = {
     createLives() {
         this.lives1.push(new Lives(this.ctx, this.platform1.platformPos.x, this.platform1.platformPos.y))
     },
+
     createBullets() {
         this.bullets1.push(new Bullets(this.ctx, this.player1.playerPos.x, this.player1.playerPos.y, this.player1.playerSize.w, this.player1.playerSize.h))
+    },
+
+    createEnemies() {
+        this.enemies1.push(new Enemies(this.ctx, this.gameSize, 250, 250))
+        console.log(this.enemies1)
     },
 
 
@@ -158,6 +172,7 @@ const pangApp = {
 
 
 
+
     // Lives - power ups
     generateLives() {
         this.lives1[0]?.draw()
@@ -166,8 +181,7 @@ const pangApp = {
     catchLives() {
         this.lives1?.forEach((elmnt) => {
 
-            if (this.player1.playerPos.x + this.player1.playerSize.w <= elmnt.livesPos.x + elmnt.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= elmnt.livesPos.x) {
-                console.log('estoy dentro del catch')
+            if (this.player1.playerPos.y === this.platform1.platformPos.y - this.player1.playerSize.h && this.player1.playerPos.x + this.player1.playerSize.w <= elmnt.livesPos.x + elmnt.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= elmnt.livesPos.x) {
                 if (this.livesCounter <= 3) {
                     this.livesCounter++
                 }
@@ -177,6 +191,34 @@ const pangApp = {
 
 
         )
+    },
+
+
+
+    // Enemies
+
+    bulletEnemyCollision() {
+        // console.log(this.enemies1[0].enemyPos)
+
+        this.bullets1.forEach(eachBullet => {
+
+            if (this.enemies1[0].enemyPos.x < eachBullet.bulletPos.x + eachBullet.bulletSize.w &&
+                this.enemies1[0].enemyPos.x + this.enemies1[0].enemySize.w > eachBullet.bulletPos.x &&
+                this.enemies1[0].enemyPos.y < eachBullet.bulletPos.y + eachBullet.bulletSize.h &&
+                this.enemies1[0].enemySize.h + this.enemies1[0].enemyPos.y > eachBullet.bulletPos.y) {
+
+                console.log('colisión')
+
+
+
+            }
+
+
+
+        })
+
     }
+
+
 
 }
