@@ -4,19 +4,28 @@ class Lives {
         this.ctx = ctx
         this.platformPos = { x: posX, y: posY }
 
-        this.livesSize = { w: 25, h: 25 }
+        this.livesSize = { w: 35, h: 35 }
         this.livesPos = { x: posX + 600 - this.livesSize.w, y: posY - this.livesSize.h - 7.5 }
 
         this.init()
     }
 
     init() {
-        ////        ##### AQUÍ NO SE QUE PONER :S
+        this.livesInstance = new Image()
+        this.livesInstance.src = "./img/heart.png"
     }
 
     draw() {
-        this.ctx.fillStyle = 'blue'
-        this.ctx.fillRect(this.livesPos.x, this.livesPos.y, this.livesSize.w, this.livesSize.h)
+        // this.ctx.fillStyle = 'blue'
+        // this.ctx.fillRect(this.livesPos.x, this.livesPos.y, this.livesSize.w, this.livesSize.h)
+
+        this.ctx.drawImage(
+            this.livesInstance,
+            this.livesPos.x,
+            this.livesPos.y,
+            this.livesSize.w,
+            this.livesSize.h
+        )
     }
 
 }

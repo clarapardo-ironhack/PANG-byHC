@@ -2,6 +2,7 @@ window.onload = () => {
     document.getElementById('start-button').onclick = () => {
         document.querySelector('.start-game').setAttribute('class', 'start-game hide')
         document.getElementById('canvas').classList.toggle("hide")
+
         startGame()
     }
 
@@ -59,6 +60,7 @@ const pangApp = {
     drawAll() {
         this.drawGround()
         this.drawHeader()
+        this.drawHearts()
 
         this.catchLives()
         this.platform1.draw()
@@ -85,15 +87,44 @@ const pangApp = {
     },
 
     drawGround() {
-        this.ctx.fillStyle = 'black'
+        this.ctx.fillStyle = 'greenyellow'
         this.ctx.fillRect(0, 630, this.gameSize.w, 20)
     },
 
     drawHeader() {
-        this.ctx.fillStyle = 'black'
+        this.ctx.fillStyle = 'greenyellow'
         this.ctx.fillRect(0, 0, this.gameSize.w, 45)
     },
 
+    drawHearts() {
+        // this.ctx.fillStyle = 'red'
+        // this.ctx.fillRect(20, 7.5, 110, 30)
+        let heartPic 
+        switch (this.livesCounter) {
+            case 1: 
+                heartPic = "./img/1heart.png"
+                break
+            case 2:
+                heartPic = "./img/2hearts.png"
+                break
+            case 3:
+                heartPic = "./img/3hearts.png"
+                break
+        }
+
+        this.heartsIntance = new Image()
+        this.heartsIntance.src = heartPic
+
+        this.ctx.drawImage(
+            this.heartsIntance,
+            20,
+            7.5,
+            100,
+            30
+        )
+
+    },
+    
     createPlayer() {
         this.player1 = new Player(this.ctx, this.gameSize.w / 2, this.gameSize.h - 95, 75, 75, this.gameSize)
     },
@@ -177,20 +208,22 @@ const pangApp = {
             this.clearAll()
             this.drawAll()
             this.frameCounter++
-
+            
         }, 30)
     },
-
+    
     clearAll() {
         this.ctx.clearRect(0, 0, this.gameSize.w, this.gameSize.h)
     },
-
-
-
-
+    
+    
+    
+    
     // Lives - power ups
     generateLives() {
         this.lives1[0]?.draw()
+        console.log(this.platform1.stairSize.h)
+        
     },
 
     catchLives() {
@@ -199,6 +232,11 @@ const pangApp = {
             if (this.player1.playerPos.y === this.platform1.platformPos.y - this.player1.playerSize.h && this.player1.playerPos.x + this.player1.playerSize.w <= elmnt.livesPos.x + elmnt.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= elmnt.livesPos.x) {
                 if (this.livesCounter <= 3) {
                     this.livesCounter++
+                    // switch (this.livesCounter) {
+                    //     case 1: 
+                    //         this.
+                        
+                    // }
                 }
                 this.lives1 = []
             }

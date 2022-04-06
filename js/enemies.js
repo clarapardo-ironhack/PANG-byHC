@@ -3,10 +3,10 @@ class Enemies {
     constructor(ctx, gameSize, posX, posY, sizeW, sizeH, index) {
         this.ctx = ctx
         this.gameSize = gameSize
-        
+
         this.enemyPos = { x: posX, y: posY }
         this.enemySize = { w: sizeW, h: sizeH }
-        this.enemyVel = { x: 8 * index, y: 4 }
+        this.enemyVel = { x: 10 * index, y: 5 }
 
         // this.enemyPhysics = { gravity: 0.1 }
 
@@ -14,14 +14,24 @@ class Enemies {
     }
 
     init() {
-        ///     ######### AQUÍ NO SE QUE PONER :s
+        this.enemiesInstance = new Image()
+        this.enemiesInstance.src = "./img/Bubble.png"
         this.draw()
     }
 
 
     draw() {
-        this.ctx.fillStyle = 'red'
-        this.ctx.fillRect(this.enemyPos.x, this.enemyPos.y, this.enemySize.w, this.enemySize.h)
+        // this.ctx.fillStyle = 'red'
+        // this.ctx.fillRect(this.enemyPos.x, this.enemyPos.y, this.enemySize.w, this.enemySize.h)
+
+        this.ctx.drawImage(
+            this.enemiesInstance,
+            this.enemyPos.x,
+            this.enemyPos.y,
+            this.enemySize.w,
+            this.enemySize.h
+        )
+
 
         this.move()
     }

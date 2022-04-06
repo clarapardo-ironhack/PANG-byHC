@@ -6,7 +6,10 @@ class Player {
         this.playerSize = { w: width, h: height }
         this.gameSize = { w: gameSize.w, h: gameSize.h }
 
-        this.imageInstance = undefined
+        // this.characterInstance.frames = 3
+        // this.characterInstance.index = 0
+
+        this.characterInstance = undefined
 
         this.init()
     }
@@ -14,12 +17,13 @@ class Player {
 
 
     init() {
-        this.imageInstance = new Image()
-        this.imageInstance.src = 'img/marciano.png'
+        this.characterInstance = new Image()
+        this.characterInstance.src = 'img/marciano.png'
     }
 
     draw() {
-        this.ctx.drawImage(this.imageInstance, this.playerPos.x, this.playerPos.y, this.playerSize.w, this.playerSize.h)
+        this.ctx.drawImage(this.characterInstance, this.playerPos.x, this.playerPos.y, this.playerSize.w, this.playerSize.h)
+        // this.characterInstance.framesIndex
     }
 
 
@@ -43,6 +47,18 @@ class Player {
 
     moveDown() {
         this.playerPos.y += 15
+    }
+
+
+
+    // Sprite movement
+    animate(frameCounter) {
+        if (frameCounter % 5 === 0) {
+            this.characterInstance.frameIndex++
+        }
+        if (this.characterInstance.frameIndex >= this.characterInstance.frames) {
+            this.characterInstance.frameIndex = 0
+        }
     }
 
 }
