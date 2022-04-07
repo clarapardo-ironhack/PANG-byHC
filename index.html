@@ -10,6 +10,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="./style/styles.css" />
 
     <title>PANG</title>
@@ -22,10 +31,14 @@
         <br />
         <button id="start-button"> Start Game</button>
         <div>
-            <img src="./img/flechitas.png" alt="imagen flechas">
-            <h1>Press the arrrows to move around</h1>
-            <img src="########" alt="imagen space">
-            <h1>Use de space button to shoot</h1>
+            <article>
+                <img src="./img/flechitas.png" alt="imagen flechas">
+                <h1>Press the arrrows to move around</h1>
+            </article>
+            <article>
+                <img src="./img/spacekey.png" alt="imagen space">
+                <h1>Use de space button to shoot</h1>
+            </article>
         </div>
 
     </div>
@@ -39,9 +52,9 @@
     </div>
 
     <div class="win-game hide">
-        <h1>HAS GANADO :)</h1>
-        <h1>PLAY AGAIN?</h1>
-
+        <img src="./img/win.png" alt="YOU WIN">
+        <br />
+        <button id="restart-button-win">play again</button>
     </div>
 
     <script src="./js/enemies.js"></script>

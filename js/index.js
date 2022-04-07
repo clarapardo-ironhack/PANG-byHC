@@ -13,10 +13,22 @@ window.onload = () => {
         startGame()
     }
 
+    document.getElementById('restart-button-win').onclick = () => {
+        document.querySelector('.canvas-window').setAttribute('class', 'canvas-window')
+        document.querySelector('.win-game').setAttribute('class', 'win-game hide')
+
+        startGame()
+    }
+
 
 
     function startGame() {
         pangApp.init('canvas')
+
+        this.music = new Audio("../sounds/sound.mp3")
+        this.music.play()
+        this.music.loop()
+        this.music.volume = 0.3
     }
 }
 
@@ -151,22 +163,6 @@ const pangApp = {
             timeShow = `00:${seconds}`
         }
 
-        // if (seconds > 59) {
-        //     minutes++
-        //     console.log(minutes)
-        //     seconds = 0
-        // }
-
-        // if (minutes < 10) {
-        //     minutes = `0${minutes}`
-        // } else {
-        //     minutes = `${minutes}`
-        // }
-
-        // timeShow = `${minutes}:${ seconds }`
-
-
-
         this.ctx.fillStyle = 'black'
         this.ctx.font = '30px arial'
         this.ctx.fillText(timeShow, this.gameSize.w - 100, 30)
@@ -283,7 +279,7 @@ const pangApp = {
                     this.livesCounter++
                     this.music = new Audio("../sounds/heart.mp3")
                     this.music.play()
-                    this.music.loop = false
+                    this.music.loop()
                     this.music.volume = 0.1
                 }
                 this.lives1 = []
@@ -354,7 +350,7 @@ const pangApp = {
 
                     this.music = new Audio("../sounds/heart-lose.mp3")
                     this.music.play()
-                    this.music.loop = false
+                    this.music.loop()
                     this.music.volume = 0.3
 
                 } else {
@@ -379,6 +375,7 @@ const pangApp = {
     endGameWin() {
         document.querySelector('.canvas-window').setAttribute('class', 'canvas-window hide')
         document.querySelector('.win-game').setAttribute('class', 'win-game')
+        this.reset()
     },
 
 
