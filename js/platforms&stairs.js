@@ -9,7 +9,7 @@ class PlatformsStairs {
 
         // Stair
         this.stairPos = { x: stairPosX, y: platformPosY }
-        this.stairSize = { w: 120, h: gameSize.h - platformPosY - 20 }
+        this.stairSize = { w: 90, h: gameSize.h - platformPosY - 20 }
         this.stairInstance = undefined
         this.platformInstance = undefined
 
@@ -27,8 +27,6 @@ class PlatformsStairs {
     draw() {
 
         // Platform
-        // this.ctx.fillStyle = 'grey'
-        // this.ctx.fillRect(this.platformPos.x, this.platformPos.y, this.platformSize.w, this.platformSize.h)
         this.ctx.drawImage(
             this.platformInstance,
             this.platformPos.x,
@@ -38,8 +36,6 @@ class PlatformsStairs {
         )
 
         // Stairs
-        // this.ctx.fillStyle = 'red'
-        // this.ctx.fillRect(this.stairPos.x, this.stairPos.y, this.stairSize.w, this.stairSize.h)
         this.ctx.drawImage(
             this.stairInstance,
             this.stairPos.x,

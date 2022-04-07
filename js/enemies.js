@@ -6,7 +6,7 @@ class Enemies {
 
         this.enemyPos = { x: posX, y: posY }
         this.enemySize = { w: sizeW, h: sizeH }
-        this.enemyVel = { x: 10 * index, y: 5 }
+        this.enemyVel = { x: 10 * index, y: 7 }
 
         // this.enemyPhysics = { gravity: 0.1 }
 
@@ -21,9 +21,6 @@ class Enemies {
 
 
     draw() {
-        // this.ctx.fillStyle = 'red'
-        // this.ctx.fillRect(this.enemyPos.x, this.enemyPos.y, this.enemySize.w, this.enemySize.h)
-
         this.ctx.drawImage(
             this.enemiesInstance,
             this.enemyPos.x,
@@ -55,8 +52,5 @@ class Enemies {
     invertVelocityY() {
         this.enemyVel.y *= -1
     }
-
-
-
 
 }

@@ -9,7 +9,26 @@ img {
 }
 
 #canvas {
-    background-image: url("../img/Background.png");
+    background-image: url("../img/bg7.jpg");
+    background-size: cover;
+    border: 10px solid greenyellow;
+    box-shadow:
+        0 0 60px 30px #fff,
+        0 0 100px 60px #f0f,
+        0 0 140px 90px #0ff
+        /*0 0 50px 20px greenyellow,
+        0 0 800px 40px greenyellow,
+        0 0 110px 60px rgb(225, 255, 0)*/
+
+        /* 0 0 7px rgba(172, 255, 47, 0.781),
+    0 0 10px rgba(172, 255, 47, 0.708),
+    0 0 21px #FFCC33,
+    0 0 42px #00FFFF,
+    0 0 82px #9D00FF,
+    0 0 92px greenyellow,
+    0 0 102px greenyellow,
+    0 0 151px greenyellow; */
+
 }
 
 body {
@@ -68,13 +87,14 @@ body {
     font-weight: lighter;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
 .start-game img {
-    width: 500px;
+    width: 800px;
 }
 
 .start-game div {
     display: flex;
-    margin-top:20px;
+    margin-top: 20px;
     text-align: center;
     justify-content: center;
 }
@@ -83,15 +103,38 @@ body {
     width: 45px;
     height: 30px;
     margin-right: 20px;
-} 
+}
 
 /*CANVAS WINDOW*/
 
-.canvas-window{
+.canvas-window {
     background-color: black;
     height: 100vh;
 }
 
 .canvas-window canvas {
     margin-top: 70px;
+}
+
+
+/* lOST GAME*/
+.lost-game {
+    background-image: url("../img/gameOver.jpg");
+    background-size: cover;
+    height: 100vh;
+}
+
+#restart-button {
+    margin-top: 555px;
+    padding: 15px 40px;
+    background-color: rgb(1, 1, 81);
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    color: #ff22ff;
+    font-size: 30px;
+    font-weight: bold;
+
+    text-transform: uppercase;
+    border: 3px solid #ff22ff;
+    border-radius: 10px;
+
 }

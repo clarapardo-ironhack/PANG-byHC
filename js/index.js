@@ -6,6 +6,14 @@ window.onload = () => {
         startGame()
     }
 
+    document.getElementById('restart-button').onclick = () => {
+        document.querySelector('.canvas-window').setAttribute('class', 'canvas-window')
+        document.querySelector('.lost-game').setAttribute('class', 'lost-game hide')
+
+        startGame()
+    }
+
+
 
     function startGame() {
         pangApp.init('canvas')
@@ -22,12 +30,14 @@ const pangApp = {
     gameSize: { w: undefined, h: undefined },
     canvasNode: undefined,
     ctx: undefined,
+    intervalID: undefined,
     player1: undefined,
     lives1: [],
     bullets1: [],
     enemies1: [],
     livesCounter: 3,
     frameCounter: 0,
+    timeCounter: 0,
 
 
 
@@ -61,16 +71,13 @@ const pangApp = {
         this.drawGround()
         this.drawHeader()
         this.drawHearts()
+        this.drawTime(this.timeCounter * 30)
 
         this.catchLives()
         this.platform1.draw()
         this.player1.draw()
-        this.bullets1.forEach((eachBullet) => {
-            eachBullet.draw()
-        })
-        this.enemies1.forEach((eachElement) => {
-            eachElement.draw()
-        })
+        this.bullets1.forEach(eachBullet => eachBullet.draw())
+        this.enemies1.forEach(eachElement => eachElement.draw())
         this.bulletEnemyCollision()
         this.playerEnemyCollision()
 
@@ -88,7 +95,7 @@ const pangApp = {
 
     drawGround() {
         this.ctx.fillStyle = 'greenyellow'
-        this.ctx.fillRect(0, 630, this.gameSize.w, 20)
+        this.ctx.fillRect(0, 630, this.gameSize.w + 2, 20)
     },
 
     drawHeader() {
@@ -97,12 +104,11 @@ const pangApp = {
     },
 
     drawHearts() {
-        // this.ctx.fillStyle = 'red'
-        // this.ctx.fillRect(20, 7.5, 110, 30)
-        let heartPic 
+        let heartPic
+
         switch (this.livesCounter) {
-            case 1: 
-                heartPic = "./img/1heart.png"
+            case 1:
+                heartPic = "./img/1hearts.png"
                 break
             case 2:
                 heartPic = "./img/2hearts.png"
@@ -124,7 +130,48 @@ const pangApp = {
         )
 
     },
-    
+
+    drawTime(counter) {
+        let timeShow = ""
+        let seconds = Math.trunc(counter / 1000)
+        let minutes = 0
+        let secondsAux = 0
+
+
+        if (seconds < 10) {
+            timeShow = `00:0${seconds}`
+        } else if (seconds > 59) {
+            minutes++
+            secondsAux = seconds - 60 * minutes
+            if (secondsAux < 10) {
+                secondsAux = '0' + secondsAux
+            }
+            timeShow = `0${minutes}:${secondsAux}`
+        } else {
+            timeShow = `00:${seconds}`
+        }
+
+        // if (seconds > 59) {
+        //     minutes++
+        //     console.log(minutes)
+        //     seconds = 0
+        // }
+
+        // if (minutes < 10) {
+        //     minutes = `0${minutes}`
+        // } else {
+        //     minutes = `${minutes}`
+        // }
+
+        // timeShow = `${minutes}:${ seconds }`
+
+
+
+        this.ctx.fillStyle = 'black'
+        this.ctx.font = '30px arial'
+        this.ctx.fillText(timeShow, this.gameSize.w - 100, 30)
+    },
+
     createPlayer() {
         this.player1 = new Player(this.ctx, this.gameSize.w / 2, this.gameSize.h - 95, 75, 75, this.gameSize)
     },
@@ -144,7 +191,6 @@ const pangApp = {
     createEnemies() {
         this.enemies1.push(new Enemies(this.ctx, this.gameSize, 250, 150, 150, 150, 1))
         this.enemies1.push(new Enemies(this.ctx, this.gameSize, 1000, 50, 150, 150, -1))
-
     },
 
 
@@ -199,31 +245,34 @@ const pangApp = {
             }
             if (key === ' ') {
                 this.createBullets()
+                this.music = new Audio("../sounds/shoot-sound.mp3")
+                this.music.play()
+                this.music.loop = false
+                this.music.volume = 0.3
             }
         }
     },
 
     start() {
-        setInterval(() => {
+        this.intervalID = setInterval(() => {
             this.clearAll()
             this.drawAll()
             this.frameCounter++
-            
+            this.timeCounter++
+
         }, 30)
     },
-    
+
     clearAll() {
         this.ctx.clearRect(0, 0, this.gameSize.w, this.gameSize.h)
     },
-    
-    
-    
-    
+
+
+
+
     // Lives - power ups
     generateLives() {
         this.lives1[0]?.draw()
-        console.log(this.platform1.stairSize.h)
-        
     },
 
     catchLives() {
@@ -232,24 +281,19 @@ const pangApp = {
             if (this.player1.playerPos.y === this.platform1.platformPos.y - this.player1.playerSize.h && this.player1.playerPos.x + this.player1.playerSize.w <= elmnt.livesPos.x + elmnt.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= elmnt.livesPos.x) {
                 if (this.livesCounter <= 3) {
                     this.livesCounter++
-                    // switch (this.livesCounter) {
-                    //     case 1: 
-                    //         this.
-                        
-                    // }
+                    this.music = new Audio("../sounds/heart.mp3")
+                    this.music.play()
+                    this.music.loop = false
+                    this.music.volume = 0.1
                 }
                 this.lives1 = []
             }
-        }
-
-
-        )
+        })
     },
 
 
 
-    // Collisions
-    // // 1. Enemies
+    // Enemies' collisions
     bulletEnemyCollision() {
 
         this.enemies1.forEach(eachEnemy => {
@@ -260,10 +304,19 @@ const pangApp = {
                     eachEnemy.enemyPos.y < eachBullet.bulletPos.y + eachBullet.bulletSize.h &&
                     eachEnemy.enemySize.h + eachEnemy.enemyPos.y > eachBullet.bulletPos.y) {
 
+                    this.music = new Audio("../sounds/bubble-explossion.mp3")
+                    this.music.play()
+                    this.music.loop = false
+                    this.music.volume = 1
+
                     this.enemyReduction(eachEnemy)
 
                     this.enemies1.splice(this.enemies1.indexOf(eachEnemy), 1)
-                    this.bullets1.splice(this.bullets1.indexOf(eachBullet), 1)
+                    this.bullets1.splice(this.bullets1.indexOf(eachBullet), 1.6)
+
+                    if (this.enemies1.length === 0) {
+                        this.endGameWin()
+                    }
                 }
             })
         })
@@ -275,13 +328,14 @@ const pangApp = {
         if (eachEnemy.enemySize.w < 50) {
 
         } else {
-            this.enemies1.push(new Enemies(this.ctx, this.gameSize, eachEnemy.enemyPos.x, eachEnemy.enemyPos.y, eachEnemy.enemySize.w / 2, eachEnemy.enemySize.w / 2, 1))
+            this.enemies1.push(new Enemies(this.ctx, this.gameSize, eachEnemy.enemyPos.x, eachEnemy.enemyPos.y, eachEnemy.enemySize.w / 2, eachEnemy.enemySize.w / 2, 1.7))
 
-            this.enemies1.push(new Enemies(this.ctx, this.gameSize, eachEnemy.enemyPos.x, eachEnemy.enemyPos.y, eachEnemy.enemySize.w / 2, eachEnemy.enemySize.w / 2, -1))
+            this.enemies1.push(new Enemies(this.ctx, this.gameSize, eachEnemy.enemyPos.x, eachEnemy.enemyPos.y, eachEnemy.enemySize.w / 2, eachEnemy.enemySize.w / 2, -1.4))
         }
     },
 
-    // // 2. Player
+
+    // Player's collisions
     playerEnemyCollision() {
 
         this.enemies1.forEach(eachEnemy => {
@@ -297,9 +351,13 @@ const pangApp = {
 
                 if (this.livesCounter > 1) {
                     this.livesCounter--
-                    console.log(this.livesCounter)
+
+                    this.music = new Audio("../sounds/heart-lose.mp3")
+                    this.music.play()
+                    this.music.loop = false
+                    this.music.volume = 0.3
+
                 } else {
-                    //// ####### AQUI SE MUERE  :(
                     this.endGameDeath()
                 }
 
@@ -309,9 +367,30 @@ const pangApp = {
     },
 
 
+
+    // Possible endings
     endGameDeath() {
+        document.querySelector('.canvas-window').setAttribute('class', 'canvas-window hide')
+        document.querySelector('.lost-game').setAttribute('class', 'lost-game')
+        this.reset()
 
+    },
+
+    endGameWin() {
+        document.querySelector('.canvas-window').setAttribute('class', 'canvas-window hide')
+        document.querySelector('.win-game').setAttribute('class', 'win-game')
+    },
+
+
+
+    // Restart game
+    reset() {
+        clearInterval(this.intervalID)
+        this.lives1 = []
+        this.bullets1 = []
+        this.enemies1 = []
+        this.livesCounter = 3
+        this.frameCounter = 0
+        this.timeCounter = 0
     }
-
-
 }
