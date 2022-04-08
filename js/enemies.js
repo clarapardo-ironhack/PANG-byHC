@@ -6,7 +6,7 @@ class Enemies {
 
         this.enemyPos = { x: posX, y: posY }
         this.enemySize = { w: sizeW, h: sizeH }
-        this.enemyVel = { x: 1 * index, y: 0.5 }
+        this.enemyVel = { x: 8 * index, y: 4 }
 
         // this.enemyPhysics = { gravity: 0.1 }
 

@@ -27,8 +27,8 @@ window.onload = () => {
 
         this.music = new Audio("../sounds/sound.mp3")
         this.music.play()
-        this.music.loop()
-        this.music.volume = 1
+        this.music.loop = true
+        this.music.volume = 0.1
     }
 }
 
@@ -178,7 +178,7 @@ const pangApp = {
     },
 
     createPlayer() {
-        this.player1 = new Player(this.ctx, this.gameSize.w / 2, this.gameSize.h - 95, 75, 75, this.gameSize)
+        this.player1 = new Player(this.ctx, this.gameSize.w / 2, this.gameSize.h - 95, 75, 75, this.gameSize, this)
     },
 
     createPlatformStairs() {
