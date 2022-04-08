@@ -28,7 +28,7 @@ window.onload = () => {
         this.music = new Audio("../sounds/sound.mp3")
         this.music.play()
         this.music.loop = true
-        this.music.volume = 0.1
+        this.music.volume = 0.2
     }
 }
 
