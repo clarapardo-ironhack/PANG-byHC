@@ -18,7 +18,7 @@ class PlatformsStairs {
 
     init() {
         this.stairInstance = new Image()
-        this.stairInstance.src = "./img/escalera.png"
+        this.stairInstance.src = "./img/escalera1.png"
 
         this.platformInstance = new Image()
         this.platformInstance.src = "./img/Tile.png"

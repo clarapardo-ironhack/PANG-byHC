@@ -28,7 +28,7 @@ window.onload = () => {
         this.music = new Audio("../sounds/sound.mp3")
         this.music.play()
         this.music.loop()
-        this.music.volume = 0.3
+        this.music.volume = 1
     }
 }
 
@@ -50,6 +50,7 @@ const pangApp = {
     livesCounter: 3,
     frameCounter: 0,
     timeCounter: 0,
+    heartPic: undefined,
 
 
 
@@ -101,22 +102,30 @@ const pangApp = {
             this.frameCounter = 0
             this.createLives()
         }
-
-
     },
 
     drawGround() {
-        this.ctx.fillStyle = 'greenyellow'
+        this.ctx.fillStyle = 'black'
         this.ctx.fillRect(0, 630, this.gameSize.w + 2, 20)
     },
 
     drawHeader() {
-        this.ctx.fillStyle = 'greenyellow'
+        this.ctx.fillStyle = 'black'
         this.ctx.fillRect(0, 0, this.gameSize.w, 45)
+
+        this.logoInstance = new Image()
+        this.logoInstance.src = "./img/miniLogo.png"
+
+        this.ctx.drawImage(
+            this.logoInstance,
+            580,
+            -2,
+            140,
+            40
+        )
     },
 
     drawHearts() {
-        let heartPic
 
         switch (this.livesCounter) {
             case 1:
@@ -146,25 +155,25 @@ const pangApp = {
     drawTime(counter) {
         let timeShow = ""
         let seconds = Math.trunc(counter / 1000)
-        let minutes = 0
+        let minutes
         let secondsAux = 0
-
 
         if (seconds < 10) {
             timeShow = `00:0${seconds}`
         } else if (seconds > 59) {
-            minutes++
+            minutes = Math.floor(seconds / 60)
             secondsAux = seconds - 60 * minutes
             if (secondsAux < 10) {
                 secondsAux = '0' + secondsAux
             }
             timeShow = `0${minutes}:${secondsAux}`
-        } else {
+        }
+        else {
             timeShow = `00:${seconds}`
         }
 
-        this.ctx.fillStyle = 'black'
-        this.ctx.font = '30px arial'
+        this.ctx.fillStyle = 'greenyellow'
+        this.ctx.font = '30px Chakra Petch'
         this.ctx.fillText(timeShow, this.gameSize.w - 100, 30)
     },
 
@@ -272,19 +281,29 @@ const pangApp = {
     },
 
     catchLives() {
-        this.lives1?.forEach((elmnt) => {
 
+        let aux = false
+        this.lives1?.forEach((elmnt) => {
             if (this.player1.playerPos.y === this.platform1.platformPos.y - this.player1.playerSize.h && this.player1.playerPos.x + this.player1.playerSize.w <= elmnt.livesPos.x + elmnt.livesSize.w && this.player1.playerPos.x + this.player1.playerSize.w >= elmnt.livesPos.x) {
                 if (this.livesCounter <= 3) {
-                    this.livesCounter++
+                    aux = true
+
                     this.music = new Audio("../sounds/heart.mp3")
                     this.music.play()
-                    this.music.loop()
                     this.music.volume = 0.1
                 }
-                this.lives1 = []
             }
+
         })
+
+        if (aux === true) {
+            console.log(this.livesCounter)
+            this.livesCounter++
+            console.log(this.livesCounter)
+
+            this.drawHearts()
+            this.lives1 = []
+        }
     },
 
 
@@ -302,7 +321,6 @@ const pangApp = {
 
                     this.music = new Audio("../sounds/bubble-explossion.mp3")
                     this.music.play()
-                    this.music.loop = false
                     this.music.volume = 1
 
                     this.enemyReduction(eachEnemy)
@@ -331,6 +349,8 @@ const pangApp = {
     },
 
 
+
+
     // Player's collisions
     playerEnemyCollision() {
 
@@ -350,7 +370,6 @@ const pangApp = {
 
                     this.music = new Audio("../sounds/heart-lose.mp3")
                     this.music.play()
-                    this.music.loop()
                     this.music.volume = 0.3
 
                 } else {

@@ -9,25 +9,33 @@ img {
 }
 
 #canvas {
-    background-image: url("../img/bg7.jpg");
+    background-image: url("../img/bg9.jpg");
     background-size: cover;
-    border: 10px solid greenyellow;
+    border: 10px solid black;
     box-shadow:
-        0 0 60px 30px #fff,
-        0 0 100px 60px #f0f,
-        0 0 140px 90px #0ff
-        /*0 0 50px 20px greenyellow,
-        0 0 800px 40px greenyellow,
-        0 0 110px 60px rgb(225, 255, 0)*/
+        /* 0 0 5px greenyellow,
+    0 0 10px greenyellow,
+    0 0 20px greenyellow,
+    0 0 40px greenyellow,
+    0 0 80px rgba(118, 177, 30, 0.781),
+    0 0 90px rgba(118, 177, 30, 0.781),
+    0 0 100px rgba(118, 177, 30, 0.781),
+    0 0 140px rgba(80, 120, 19, 0.781),
+    0 0 180px rgba(72, 109, 17, 0.781); */
+        /* 0 0 5px #ba201c,
+        0 0 10px #ba201c,
+        0 0 20px #ba201c,
+        0 0 40px #770029,
+        0 0 80px #770029,
+        0 0 90px #770029,
+        0 0 100px #770029,
+        0 0 140px #770029,
+        0 0 180px #770029; */
 
-        /* 0 0 7px rgba(172, 255, 47, 0.781),
-    0 0 10px rgba(172, 255, 47, 0.708),
-    0 0 21px #FFCC33,
-    0 0 42px #00FFFF,
-    0 0 82px #9D00FF,
-    0 0 92px greenyellow,
-    0 0 102px greenyellow,
-    0 0 151px greenyellow; */
+        0 0 7px rgb(255, 158, 47),
+        0 0 10px #fc4b08,
+        0 0 14px #ff2301,
+        0 0 21px #fe019a;
 
 }
 
@@ -79,6 +87,13 @@ body {
         0 0 102px #0fa,
         0 0 151px #0fa;
 
+        transition-duration: 0.4s;
+        cursor: pointer;
+}
+
+#start-button:hover{
+background-color: yellowgreen;
+color: white;
 }
 
 .start-game h1 {
@@ -109,8 +124,10 @@ body {
     margin: 20px
 }
 
-/*CANVAS WINDOW*/
 
+
+
+/*CANVAS WINDOW*/
 .canvas-window {
     background-color: black;
     height: 100vh;
@@ -123,24 +140,57 @@ body {
 
 /*GAME OVER*/
 .lost-game {
-    background-image: url("../img/gameOver.jpg");
-    background-size: cover;
+    background-color: black;
     height: 100vh;
+    text-align: center;
+    /* background-image: url("../img/gameOver.jpg");
+    background-size: cover;
+    height: 100vh; */
+}
+
+.lost-game h1 {
+    color: rgb(208, 255, 138);
+    text-transform: uppercase;
+    font-family: 'Rubik Glitch', cursive;
+    font-weight: lighter;
+    font-size: 200px;
+    padding-top: 150px;
+
+    text-shadow: 
+    /* 0 0 7px rgb(208, 255, 138), */
+        0 0 10px #00FF00,
+        0 0 14px greenyellow,
+        0 0 21px green;
 }
 
 #restart-button {
-    margin-top: 555px;
-    padding: 15px 40px;
-    background-color: rgb(1, 1, 81);
-    font-family: 'Audiowide', cursive;
-    color: #ff22ff;
+    margin-top: 70px;
+    padding: 15px 55px;
+    background-color: black;
+    font-family: 'Chakra Petch',
+        sans-serif;
+    color: rgb(255, 204, 116);
     font-size: 30px;
     font-weight: bold;
 
     text-transform: uppercase;
-    border: 3px solid #ff22ff;
+    border: 3px solid rgb(238, 204, 146);
     border-radius: 10px;
 
+    box-shadow:
+        0 0 7px rgb(161, 255, 47),
+        0 0 10px #9efc08,
+        0 0 14px #6fff01,
+        0 0 21px #fe019a;
+    transition-duration: 0.4s;
+    cursor: pointer;
+
+}
+
+
+#restart-button:hover {
+    background-color: whitesmoke;
+    color: black;
 }
 
 /* WIN GAME*/
@@ -157,10 +207,10 @@ body {
 }
 
 #restart-button-win {
-    padding: 15px 40px;
+    padding: 15px 55px;
     background-color: black;
-    font-family: 'Audiowide', cursive;
-    color: white;
+    font-family: 'Chakra Petch', sans-serif;
+    color: rgb(255, 204, 116);
     font-size: 30px;
     font-weight: bold;
 
@@ -173,8 +223,13 @@ body {
         0 0 10px #fc4b08,
         0 0 14px #ff2301,
         0 0 21px #fe019a;
+    transition-duration: 0.4s;
+    cursor: pointer;
 
 
+}
 
-
+#restart-button-win:hover {
+    background-color: rgb(238, 204, 146);
+    color: black;
 }
