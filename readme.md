@@ -2,7 +2,7 @@
 
 ###### By [Hugo Álvarez](https://github.com/HugoHap) and [Clara Pardo](https://github.com/clarapardo)
 
-#### Want to play? [Click here](https://clarapardo-ironhack.github.io/Project1/)
+#### Want to play? [Click here](https://clarapardo-ironhack.github.io/PANG-byHC/)
 
 
 This project was done in just **1 week** as part of our web development Bootcamp assignments at **Ironhack**. 
