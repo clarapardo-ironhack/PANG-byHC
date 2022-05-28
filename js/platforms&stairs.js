@@ -43,8 +43,5 @@ class PlatformsStairs {
             this.stairSize.w,
             this.stairSize.h
         )
-
     }
-
-
 }

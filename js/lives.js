@@ -23,11 +23,6 @@ class Lives {
             this.livesSize.w,
             this.livesSize.h
         )
-
-        // if (this.frameCounter % 10 === 0) {
-        //     this.lives1.livesSize.w *= 2
-        //     this.lives1.livesSize.h *= 2
-        // }
     }
 
 }

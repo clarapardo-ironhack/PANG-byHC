@@ -30,24 +30,5 @@ class Bullets {
     move() {
         this.bulletPos.y -= 15
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 }

@@ -21,11 +21,10 @@ window.onload = () => {
     }
 
 
-
     function startGame() {
         pangApp.init('canvas')
 
-        this.music = new Audio("../sounds/sound.mp3")
+        this.music = new Audio("./sounds/sound.mp3")
         this.music.play()
         this.music.loop = true
         this.music.volume = 0.2
@@ -149,7 +148,6 @@ const pangApp = {
             100,
             30
         )
-
     },
 
     drawTime(counter) {
@@ -250,7 +248,7 @@ const pangApp = {
             }
             if (key === ' ') {
                 this.createBullets()
-                this.music = new Audio("../sounds/shoot-sound.mp3")
+                this.music = new Audio("./sounds/shoot-sound.mp3")
                 this.music.play()
                 this.music.loop = false
                 this.music.volume = 0.3
@@ -288,7 +286,7 @@ const pangApp = {
                 if (this.livesCounter <= 3) {
                     aux = true
 
-                    this.music = new Audio("../sounds/heart.mp3")
+                    this.music = new Audio("./sounds/heart.mp3")
                     this.music.play()
                     this.music.volume = 0.1
                 }
@@ -319,7 +317,7 @@ const pangApp = {
                     eachEnemy.enemyPos.y < eachBullet.bulletPos.y + eachBullet.bulletSize.h &&
                     eachEnemy.enemySize.h + eachEnemy.enemyPos.y > eachBullet.bulletPos.y) {
 
-                    this.music = new Audio("../sounds/bubble-explossion.mp3")
+                    this.music = new Audio("./sounds/bubble-explossion.mp3")
                     this.music.play()
                     this.music.volume = 1
 
@@ -368,7 +366,7 @@ const pangApp = {
                 if (this.livesCounter > 1) {
                     this.livesCounter--
 
-                    this.music = new Audio("../sounds/heart-lose.mp3")
+                    this.music = new Audio("./sounds/heart-lose.mp3")
                     this.music.play()
                     this.music.volume = 0.3
 

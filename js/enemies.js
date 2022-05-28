@@ -29,7 +29,6 @@ class Enemies {
             this.enemySize.h
         )
 
-
         this.move()
     }
 

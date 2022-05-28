@@ -9,13 +9,8 @@ class Player {
 
         this.characterInstance = undefined
 
-        // this.characterInstance.frames = 5
-        // this.characterInstance.framesIndex = 0
-
-
         this.init()
     }
-
 
 
     init() {
@@ -28,20 +23,6 @@ class Player {
 
     draw() {
         this.ctx.drawImage(this.characterInstance, this.playerPos.x, this.playerPos.y, this.playerSize.w, this.playerSize.h)
-
-        // this.ctx.drawImage(
-        //     this.characterInstance,
-        //     this.characterInstance.framesIndex * (this.characterInstance.width / this.characterInstance.frames),
-        //     0,
-        //     this.characterInstance.width / this.characterInstance.frames,
-        //     this.characterInstance.height,
-        //     this.playerPos.x,
-        //     this.playerPos.y,
-        //     this.playerSize.w,
-        //     this.playerSize.h
-        // )
-        // this.characterInstance.framesIndex
-        // this.animate(this.app.timeCounter)
     }
 
 
@@ -80,5 +61,4 @@ class Player {
             this.characterInstance.framesIndex = 0
         }
     }
-
 }

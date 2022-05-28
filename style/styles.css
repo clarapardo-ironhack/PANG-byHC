@@ -13,30 +13,10 @@ img {
     background-size: cover;
     border: 10px solid black;
     box-shadow:
-        /* 0 0 5px greenyellow,
-    0 0 10px greenyellow,
-    0 0 20px greenyellow,
-    0 0 40px greenyellow,
-    0 0 80px rgba(118, 177, 30, 0.781),
-    0 0 90px rgba(118, 177, 30, 0.781),
-    0 0 100px rgba(118, 177, 30, 0.781),
-    0 0 140px rgba(80, 120, 19, 0.781),
-    0 0 180px rgba(72, 109, 17, 0.781); */
-        /* 0 0 5px #ba201c,
-        0 0 10px #ba201c,
-        0 0 20px #ba201c,
-        0 0 40px #770029,
-        0 0 80px #770029,
-        0 0 90px #770029,
-        0 0 100px #770029,
-        0 0 140px #770029,
-        0 0 180px #770029; */
-
         0 0 7px rgb(255, 158, 47),
         0 0 10px #fc4b08,
         0 0 14px #ff2301,
         0 0 21px #fe019a;
-
 }
 
 body {
@@ -56,11 +36,6 @@ body {
     padding-top: 50px;
     font-family: sans-serif;
     color: white;
-    /* display: flex; */
-    /* justify-content: center;
-    align-items: center;
-    flex-direction: column; */
-
 }
 
 #start-button {
@@ -87,13 +62,13 @@ body {
         0 0 102px #0fa,
         0 0 151px #0fa;
 
-        transition-duration: 0.4s;
-        cursor: pointer;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
-#start-button:hover{
-background-color: yellowgreen;
-color: white;
+#start-button:hover {
+    background-color: yellowgreen;
+    color: white;
 }
 
 .start-game h1 {
@@ -134,7 +109,7 @@ color: white;
 }
 
 .canvas-window canvas {
-    margin-top: 70px;
+    margin-top: 1.5%;
 }
 
 
@@ -143,9 +118,6 @@ color: white;
     background-color: black;
     height: 100vh;
     text-align: center;
-    /* background-image: url("../img/gameOver.jpg");
-    background-size: cover;
-    height: 100vh; */
 }
 
 .lost-game h1 {
@@ -156,8 +128,8 @@ color: white;
     font-size: 200px;
     padding-top: 150px;
 
-    text-shadow: 
-    /* 0 0 7px rgb(208, 255, 138), */
+    text-shadow:
+        /* 0 0 7px rgb(208, 255, 138), */
         0 0 10px #00FF00,
         0 0 14px greenyellow,
         0 0 21px green;
@@ -184,7 +156,6 @@ color: white;
         0 0 21px #fe019a;
     transition-duration: 0.4s;
     cursor: pointer;
-
 }
 
 
@@ -193,8 +164,8 @@ color: white;
     color: black;
 }
 
-/* WIN GAME*/
 
+/* WIN GAME*/
 .win-game {
     background-color: black;
     height: 100vh;
@@ -203,7 +174,6 @@ color: white;
 
 .win-game img {
     width: 900px;
-
 }
 
 #restart-button-win {
@@ -225,8 +195,6 @@ color: white;
         0 0 21px #fe019a;
     transition-duration: 0.4s;
     cursor: pointer;
-
-
 }
 
 #restart-button-win:hover {
